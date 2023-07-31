@@ -48,7 +48,7 @@ def show_hidden_word(secret_word, old_letters_guessed):
 
 def is_valid_input(letter_guessed):
     size_above1 = len(letter_guessed) > 1
-    only_abcletters = letter_guessed.isalpha()
+    only_abcletters = letter_guessed.isalpha() and is_all_letters(letter_guessed)
     if (not size_above1) and only_abcletters:
         return True
     elif size_above1 and not only_abcletters:
@@ -164,6 +164,10 @@ def try_update_letter_guessed(letter_guessed, old_letters_guessed):
         print(' -> '.join(old_letters_guessed))
     return False
 
+import re
+
+def is_all_letters(input_string):
+    return bool(re.fullmatch(r'[a-zA-Z]+', input_string))
 
 if __name__ == "__main__":
     '''
@@ -177,7 +181,7 @@ if __name__ == "__main__":
     wordsFile.close()
 
     file_path = input("Enter file path: ")  # please copy this: C:\Users\ormen\PycharmProjects\selfPY_campusIL\input.txt
-    index = int(input("Enter index: "))  # please enter the number 20 (position of 'Hangman')
+    index = int(input("Enter index: "))  # please enter the number 19 (position of 'Hangman')
     print("\nLet's start!\n")
     print_hangman(num_of_tries)
     globals()["secretWord"] = choose_word(file_path, index)[1].lower() # extract the secret word
