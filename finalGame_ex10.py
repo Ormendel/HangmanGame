@@ -177,7 +177,7 @@ if __name__ == "__main__":
     wordsFile.close()
 
     file_path = input("Enter file path: ")  # please copy this: C:\Users\ormen\PycharmProjects\selfPY_campusIL\input.txt
-    index = int(input("Enter index: "))  # please enter the number 19 (position of 'Hangman')
+    index = int(input("Enter index: "))  # please enter the number 20 (position of 'Hangman')
     print("\nLet's start!\n")
     print_hangman(num_of_tries)
     globals()["secretWord"] = choose_word(file_path, index)[1].lower() # extract the secret word
