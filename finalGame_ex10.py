@@ -7,6 +7,55 @@ revealLetters = "change me also after getting input"
 ''' global variables '''
 
 
+'''
+hangman floating for 5 seconds
+'''
+import tkinter as tk
+import random
+
+def move_hangman():
+    x = random.randint(0, root.winfo_screenwidth() - root.winfo_reqwidth())
+    y = random.randint(0, root.winfo_screenheight() - root.winfo_reqheight())
+    root.geometry("+{}+{}".format(x, y))
+    root.after(1000, move_hangman)
+
+def close_window():
+    root.destroy()
+
+root = tk.Tk()
+root.title("Floating Hangman")
+root.attributes("-topmost", True)
+root.overrideredirect(True)
+
+# Set the window size
+window_width = 400
+window_height = 200
+root.geometry("{}x{}".format(window_width, window_height))
+
+hangman_label = tk.Label(root, text="Hangman", font=("Arial", 40))
+hangman_label.pack(expand=True, fill="both")
+
+root.update_idletasks()
+
+# Calculate the position to center the window
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+x = (screen_width - window_width) // 2
+y = (screen_height - window_height) // 2
+
+# Set the window position to center
+root.geometry("+{}+{}".format(x, y))
+
+root.after(1000, move_hangman)
+
+# Close the window after 2 seconds (2000 milliseconds)
+root.after(2000, close_window)
+
+root.mainloop()
+'''
+hangman floating for 5 seconds
+'''
+
 def prompt() -> None:
     """
     This function outputs prompt of Hangman game to the user
@@ -177,7 +226,7 @@ if __name__ == "__main__":
     print("\nBEGIN! \n")
     wordsFile = open("input.txt", "w")
     wordsFile.write(
-        "cat aviva or chen tom tal noy stav ofek shahar dad mom adi stav tal liat amit shiri tomer hangman noa yuval topaz ori idan ofir gili meitar adir gaya yarden sarit liri mia yanai ronit shamir")
+        "aviva or chen tom tal noy stav ofek shahar tzvika sigal adi stav tal liat amit shiri tomer noa yuval topaz ori idan ofir gili meitar adir gaya yarden sarit liri mia yanai ronit shamir arie gali chen shai tal zohar meital maya inbal ofir duli koren nuri")
     wordsFile.close()
 
     file_path = input("Enter file path: ")  # please copy this: C:\Users\ormen\PycharmProjects\selfPY_campusIL\input.txt
@@ -215,3 +264,4 @@ if __name__ == "__main__":
 
     if num_of_tries == MAX_TRIES:
         print("LOSE")
+        print("The word was: "+secretWord)
